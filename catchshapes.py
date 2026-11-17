@@ -11,6 +11,7 @@ BASKET_POS = [200, 350]
 WHITE = "#ffffff"
 BROWN = "#946f53"
 score = 0
+shapes_on_ground = 0
 x = random.randint(0, 400)
 y = 0
 
@@ -50,16 +51,24 @@ while engine:
             pygame.draw.polygon(screen, colour, [(0+x, 20+y), (10+x, 0+y), (20+x, 20+y)])
 
         pygame.draw.rect(screen, BROWN, [BASKET_POS[0], BASKET_POS[1], 100, 50])
+        
         y += 1
-        if y >= 400 or (y == BASKET_POS[1] and x == BASKET_POS[0]):
-            if y == BASKET_POS[1] and x == BASKET_POS[0]:
+        if y >= 400 or ((y == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x <= BASKET_POS[0]+50)):
+            if (y == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x <= BASKET_POS[0]+50):
                 score += 1
+            else:
+                shapes_on_ground += 1
+            
             x = random.randint(0, 400)
             y = 0
             break
+        
         pygame.display.flip()
         clock.tick(60)
-
+        if shapes_on_ground == 5:
+            print("=== GAME OVER ===")
+            print(f"Your score is: {score}")
+            engine = False
 
 pygame.quit()
 sys.exit()
