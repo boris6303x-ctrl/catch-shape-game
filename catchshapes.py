@@ -15,6 +15,7 @@ BLACK = "#000000"
 score = 0
 shapes_on_ground = 0
 game_over = False
+speed_increment = 1
 monospace = pygame.font.SysFont("Consolas", 20)
 monospace_bold = pygame.font.SysFont("Consolas", 24, bold=True)
 monospace_small = pygame.font.SysFont("Consolas", 16)
@@ -40,8 +41,20 @@ while engine:
                     BASKET_POS[0] -= 10
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_e:
                     BASKET_POS[0] += 10
+                elif (event.key == pygame.K_EQUALS or event.key == pygame.K_PLUS) and speed_increment != 20:
+                    while True:
+                        speed_increment += 1
+                        if 400 % speed_increment == 0:
+                            break
+                elif (event.key == pygame.K_MINUS or event.key == pygame.K_UNDERSCORE) and speed_increment != 1:
+                    while True:
+                        speed_increment -= 1
+                        if 400 % speed_increment == 0:
+                            break
                 elif event.key == pygame.K_SPACE and game_over == True:
+                    score = 0
                     shapes_on_ground = 0
+                    speed_increment = 1
                     game_over = False
                 elif event.key == pygame.K_ESCAPE:
                     engine = False
@@ -66,7 +79,7 @@ while engine:
 
             pygame.draw.rect(screen, BROWN, [BASKET_POS[0], BASKET_POS[1], 100, 50])
             
-            y += 1
+            y += speed_increment
             if y >= 400 or ((y == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x <= BASKET_POS[0]+50)):
                 if (y == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x <= BASKET_POS[0]+50):
                     score += 1
@@ -76,6 +89,8 @@ while engine:
                 x = random.randint(0, 400)
                 y = 0
                 break
+
+            screen.blit(monospace_small.render(f"Score: {score}\nSpeed: {speed_increment}", True, BLACK))
         
         pygame.display.flip()
         clock.tick(60)
