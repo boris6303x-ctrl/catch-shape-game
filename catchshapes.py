@@ -38,18 +38,18 @@ while engine:
                 engine = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_q:
-                    BASKET_POS[0] -= 10
+                    BASKET_POS[0] -= 20
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_e:
-                    BASKET_POS[0] += 10
+                    BASKET_POS[0] += 20
                 elif (event.key == pygame.K_EQUALS or event.key == pygame.K_PLUS) and speed_increment != 20:
                     while True:
                         speed_increment += 1
-                        if 400 % speed_increment == 0:
+                        if 200 % speed_increment == 0:
                             break
                 elif (event.key == pygame.K_MINUS or event.key == pygame.K_UNDERSCORE) and speed_increment != 1:
                     while True:
                         speed_increment -= 1
-                        if 400 % speed_increment == 0:
+                        if 200 % speed_increment == 0:
                             break
                 elif event.key == pygame.K_SPACE and game_over == True:
                     score = 0
