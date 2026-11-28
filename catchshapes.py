@@ -45,10 +45,19 @@ while engine:
     shapetype1 = random.randint(1, 4)
     shapetype2 = random.randint(1, 4)
     shapetype3 = random.randint(1, 4)
-    colour = list(str(hex(random.randint(0x000000, 0xffffff))).replace("0x", "#"))
-    if len(colour) < 7:
-        colour.insert(1, "0"*(7-len(colour)))
-    colour = ''.join(colour)
+    colour1 = list(str(hex(random.randint(0x000000, 0xffffff))).replace("0x", "#"))
+    if len(colour1) < 7:
+        colour1.insert(1, "0"*(7-len(colour1)))
+    colour1 = ''.join(colour1)
+    colour2 = list(str(hex(random.randint(0x000000, 0xffffff))).replace("0x", "#"))
+    if len(colour2) < 7:
+        colour2.insert(1, "0"*(7-len(colour2)))
+    colour2 = ''.join(colour2)
+    colour3 = list(str(hex(random.randint(0x000000, 0xffffff))).replace("0x", "#"))
+    if len(colour3) < 7:
+        colour3.insert(1, "0"*(7-len(colour3)))
+    colour3 = ''.join(colour3)
+    
     shape_amount = count_shapes()
     
     while engine:
@@ -88,40 +97,40 @@ while engine:
             screen.blit(monospace_small.render("Press SPACE to try again\nOr press ESCAPE or close the window to quit", True, BLACK))
         else:
             if shapetype1 == 1:
-                pygame.draw.rect(screen, colour, [x1, y1, 20, 20])
+                pygame.draw.rect(screen, colour1, [x1, y1, 20, 20])
             if shapetype1 == 2:
-                pygame.draw.circle(screen, colour, [x1, y1], 10)
+                pygame.draw.circle(screen, colour1, [x1, y1], 10)
             if shapetype1 == 3:
-                pygame.draw.rect(screen, colour, [x1, y1, 20, 10])
+                pygame.draw.rect(screen, colour1, [x1, y1, 20, 10])
             if shapetype1 == 4:
-                pygame.draw.polygon(screen, colour, [(0+x1, 20+y1), (10+x1, 0+y1), (20+x1, 20+y1)])
+                pygame.draw.polygon(screen, colour1, [(0+x1, 20+y1), (10+x1, 0+y1), (20+x1, 20+y1)])
             if shape_amount == 2:
                 if shapetype2 == 1:
-                    pygame.draw.rect(screen, colour, [x2, y2, 20, 20])
+                    pygame.draw.rect(screen, colour2, [x2, y2, 20, 20])
                 if shapetype2 == 2:
-                    pygame.draw.circle(screen, colour, [x2, y2], 10)
+                    pygame.draw.circle(screen, colour2, [x2, y2], 10)
                 if shapetype2 == 3:
-                    pygame.draw.rect(screen, colour, [x2, y2, 20, 10])
+                    pygame.draw.rect(screen, colour2, [x2, y2, 20, 10])
                 if shapetype2 == 4:
-                    pygame.draw.polygon(screen, colour, [(0+x2, 20+y2), (10+x2, 0+y2), (20+x2, 20+y2)])
+                    pygame.draw.polygon(screen, colour2, [(0+x2, 20+y2), (10+x2, 0+y2), (20+x2, 20+y2)])
             if shape_amount == 3:
                 if shapetype2 == 1:
-                    pygame.draw.rect(screen, colour, [x2, y2, 20, 20])
+                    pygame.draw.rect(screen, colour2, [x2, y2, 20, 20])
                 if shapetype2 == 2:
-                    pygame.draw.circle(screen, colour, [x2, y2], 10)
+                    pygame.draw.circle(screen, colour2, [x2, y2], 10)
                 if shapetype2 == 3:
-                    pygame.draw.rect(screen, colour, [x2, y2, 20, 10])
+                    pygame.draw.rect(screen, colour2, [x2, y2, 20, 10])
                 if shapetype2 == 4:
-                    pygame.draw.polygon(screen, colour, [(0+x2, 20+y2), (10+x2, 0+y2), (20+x2, 20+y2)])
+                    pygame.draw.polygon(screen, colour2, [(0+x2, 20+y2), (10+x2, 0+y2), (20+x2, 20+y2)])
                 
                 if shapetype3 == 1:
-                    pygame.draw.rect(screen, colour, [x3, y3, 20, 20])
+                    pygame.draw.rect(screen, colour3, [x3, y3, 20, 20])
                 if shapetype3 == 2:
-                    pygame.draw.circle(screen, colour, [x3, y3], 10)
+                    pygame.draw.circle(screen, colour3, [x3, y3], 10)
                 if shapetype3 == 3:
-                    pygame.draw.rect(screen, colour, [x3, y3, 20, 10])
+                    pygame.draw.rect(screen, colour3, [x3, y3, 20, 10])
                 if shapetype3 == 4:
-                    pygame.draw.polygon(screen, colour, [(0+x3, 20+y3), (10+x3, 0+y3), (20+x3, 20+y3)])
+                    pygame.draw.polygon(screen, colour3, [(0+x3, 20+y3), (10+x3, 0+y3), (20+x3, 20+y3)])
 
             pygame.draw.rect(screen, BROWN, [BASKET_POS[0], BASKET_POS[1], 100, 50])
             
@@ -137,7 +146,6 @@ while engine:
                     score += 1
                 else:
                     shapes_on_ground += 1
-                
                 x1 = random.randint(0, 400)
                 x2 = random.randint(0, 400)
                 x3 = random.randint(0, 400)
@@ -148,7 +156,36 @@ while engine:
                     break
                 else:
                     shape_amount -= 1
-
+            if y2 >= 400 or ((y2 == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x2 <= BASKET_POS[0]+50)):
+                if (y2 == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x2 <= BASKET_POS[0]+50):
+                    score += 1
+                else:
+                    shapes_on_ground += 1
+                x1 = random.randint(0, 400)
+                x2 = random.randint(0, 400)
+                x3 = random.randint(0, 400)
+                y1 = 0
+                y2 = 0
+                y3 = 0
+                if shape_amount == 1:
+                    break
+                else:
+                    shape_amount -= 1
+            if y3 >= 400 or ((y3 == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x3 <= BASKET_POS[0]+50)):
+                if (y3 == BASKET_POS[1]) and (BASKET_POS[0]-50 <= x3 <= BASKET_POS[0]+50):
+                    score += 1
+                else:
+                    shapes_on_ground += 1
+                    x1 = random.randint(0, 400)
+                    x2 = random.randint(0, 400)
+                    x3 = random.randint(0, 400)
+                    y1 = 0
+                    y2 = 0
+                    y3 = 0
+                    if shape_amount == 1:
+                        break
+                    else:
+                        shape_amount -= 1
             screen.blit(monospace_small.render(f"Score: {score}\nSpeed: {speed_increment}", True, BLACK))
         
         pygame.display.flip()
